@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/access/RoleBasedAccessControl.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">contracts/access/</a> RoleBasedAccessControl.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>24/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">53.13% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>17/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>8/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>25/25</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">38×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">77×</span>
+<span class="cline-any cline-yes">77×</span>
+<span class="cline-any cline-yes">77×</span>
+<span class="cline-any cline-yes">77×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">pragma solidity ^0.5.4;
+&nbsp;
+import "./../ownership/OwnableNonTransferable.sol";
+&nbsp;
+/**
+ * @title RoleBasedAccessControl
+ * @dev This contract implements generic roles-based access control.
+ */
+contract RoleBasedAccessControl is OwnableNonTransferable {
+&nbsp;
+    // Constants    
+    bytes32 constant private ZERO_BYTES = bytes32(0);
+    address constant private ZERO_ADDRESS = address(0);
+&nbsp;
+    // Mappings
+    mapping (address =&gt; mapping (bytes32 =&gt; bool)) private _securityOperators;
+    mapping (address =&gt; mapping (bytes32 =&gt; mapping (bytes32 =&gt; bool))) private _addressRoles;
+&nbsp;
+    event SecurityOperatorAdded(address indexed operator, bytes32 indexed asset);
+    event SecurityOperatorRemoved(address indexed operator, bytes32 indexed asset);
+&nbsp;
+    /**
+     * Constructor
+     * @param owner The owner of the smart contract
+     */
+    constructor(address owner) internal OwnableNonTransferable(owner) {
+    }
+&nbsp;
+    /**
+     * Checks if the sender is allowed to define role members.
+     */
+    modifier onlySecurityOperator(bytes32 asset) {
+        require(isSecurityOperator(msg.sender, asset), 
+        "Only RBAC security operators are allowed to define roles membership");
+        _;
+    }
+&nbsp;
+    /**
+     * Indicates if the address specified is allowed to define role membership.
+     * @param addr The address of the operator.
+     * @param asset The asset the operator is allowed to manage.
+     * @return returns true if the operator specified is permitted to define role membership.
+     */
+    function isSecurityOperator(address addr, bytes32 asset) public view returns (bool) {
+        return _securityOperators[addr][asset];
+    }
+&nbsp;
+    /**
+     * Allows the address specified to define role membership.
+     * Only the owner of the contract is allowed to add/remove operators.
+     * @param addr The address of the operator.
+     * @param asset The asset the operator is allowed to manage.
+     */
+    function addOperator(address addr, bytes32 asset) public onlyContractOwner(msg.sender) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(addr != ZERO_ADDRESS, "The address is required.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(!isSecurityOperator(addr, asset), "The operator already exists.");
+        _securityOperators[addr][asset] = true;
+        emit SecurityOperatorAdded(addr, asset);
+    }
+&nbsp;
+    /**
+     * Revokes access to the operator specified.
+     * Only the owner of the contract is allowed to add/remove operators.
+     * @param addr The address of the operator
+     * @param asset The asset the operator is allowed to manage.
+     */
+    function removeOperator(address addr, bytes32 asset) public onlyContractOwner(msg.sender) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(addr != ZERO_ADDRESS, "The address of the whitelist operator is required.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(isSecurityOperator(addr, asset), "The operator does not exist.");
+        _securityOperators[addr][asset] = false;
+        emit SecurityOperatorRemoved(addr, asset);
+    }
+&nbsp;
+    /**
+     * Indicates whether a given address belongs to the role specified.
+     * @param addr Specifies the address.
+     * @param role Specifies the role.
+     * @param asset The asset the operator is allowed to manage.
+     */
+    function isMemberOf(address addr, bytes32 role, bytes32 asset) public view returns (bool) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(addr != ZERO_ADDRESS, "The address is required.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(role != ZERO_BYTES, "The role is required.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(asset != ZERO_BYTES, "The asset is required.");
+        return _addressRoles[addr][role][asset];
+    }
+&nbsp;
+    /**
+     * Adds a public address to the role specified.
+     * @param addr Specifies the address.
+     * @param role Specifies the role.
+     * @param asset The asset the operator is allowed to manage.
+     */
+    function addToRole(address addr, bytes32 role, bytes32 asset) public onlySecurityOperator(asset) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(addr != ZERO_ADDRESS, "The address is required.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(role != ZERO_BYTES, "The role is required.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(asset != ZERO_BYTES, "The asset is required.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(!isMemberOf(addr, role, asset), "The address has been added to this role already.");
+        _addressRoles[addr][role][asset] = true;
+    }
+    
+     /**
+     * Removes a public address from the role specified.
+     * @param addr Specifies the address.
+     * @param role Specifies the role.
+     * @param asset The asset the operator is allowed to manage.
+     */
+    function removeFromRole(address addr, bytes32 role, bytes32 asset) public onlySecurityOperator(asset) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(addr != ZERO_ADDRESS, "The address is required.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(role != ZERO_BYTES, "The role is required.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(asset != ZERO_BYTES, "The asset is required.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(isMemberOf(addr, role, asset), "The address is not a member of this role.");
+        _addressRoles[addr][role][asset] = false;
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 20 2019 12:57:02 GMT+0300 (Arabian Standard Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

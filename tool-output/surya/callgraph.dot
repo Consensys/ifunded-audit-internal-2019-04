@@ -1,0 +1,621 @@
+digraph G {
+  graph [ ratio = "auto", page = "100", compound = true ];
+subgraph "clusterPlatformProviderRbac" {
+  graph [ label = "PlatformProviderRbac", color = "lightgray", style = "filled" ];
+  "PlatformProviderRbac.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "PlatformProviderRbac.onlyLevel1" [ label = "onlyLevel1", color = "yellow" ];
+  "PlatformProviderRbac.onlyLevel2" [ label = "onlyLevel2", color = "yellow" ];
+  "PlatformProviderRbac.getAppIdentifier" [ label = "getAppIdentifier", color = "green" ];
+  "PlatformProviderRbac.addToLevel1" [ label = "addToLevel1", color = "green" ];
+  "PlatformProviderRbac.addToLevel2" [ label = "addToLevel2", color = "green" ];
+  "PlatformProviderRbac.removeFromLevel1" [ label = "removeFromLevel1", color = "green" ];
+  "PlatformProviderRbac.removeFromLevel2" [ label = "removeFromLevel2", color = "green" ];
+  "PlatformProviderRbac.isLevel1" [ label = "isLevel1" ];
+  "PlatformProviderRbac.isLevel2" [ label = "isLevel2" ];
+  "PlatformProviderRbac.addToRole" [ label = "addToRole" ];
+  "PlatformProviderRbac.removeFromRole" [ label = "removeFromRole" ];
+  "PlatformProviderRbac.isMemberOf" [ label = "isMemberOf" ];
+}
+
+subgraph "clusterReentrancyGuard" {
+  graph [ label = "ReentrancyGuard", color = "lightgray", style = "filled" ];
+  "ReentrancyGuard.<Constructor>" [ label = "<Constructor>", color = "white" ];
+  "ReentrancyGuard.nonReentrant" [ label = "nonReentrant", color = "yellow" ];
+}
+
+subgraph "clusterRoleBasedAccessControl" {
+  graph [ label = "RoleBasedAccessControl", color = "lightgray", style = "filled" ];
+  "RoleBasedAccessControl.<Constructor>" [ label = "<Constructor>", color = "white" ];
+  "RoleBasedAccessControl.onlySecurityOperator" [ label = "onlySecurityOperator", color = "yellow" ];
+  "RoleBasedAccessControl.isSecurityOperator" [ label = "isSecurityOperator" ];
+  "RoleBasedAccessControl.addOperator" [ label = "addOperator", color = "green" ];
+  "RoleBasedAccessControl.removeOperator" [ label = "removeOperator", color = "green" ];
+  "RoleBasedAccessControl.isMemberOf" [ label = "isMemberOf" ];
+  "RoleBasedAccessControl.addToRole" [ label = "addToRole", color = "green" ];
+  "RoleBasedAccessControl.removeFromRole" [ label = "removeFromRole", color = "green" ];
+}
+
+subgraph "clusterERC1400" {
+  graph [ label = "ERC1400", color = "lightgray", style = "filled" ];
+  "ERC1400.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "ERC1400.transfer" [ label = "transfer", color = "blue" ];
+  "ERC1400.transferFrom" [ label = "transferFrom", color = "blue" ];
+  "ERC1400.approve" [ label = "approve", color = "blue" ];
+  "ERC1400.issue" [ label = "issue", color = "blue" ];
+  "ERC1400.transferFromWithData" [ label = "transferFromWithData", color = "blue" ];
+  "ERC1400.transferWithData" [ label = "transferWithData", color = "blue" ];
+  "ERC1400.redeem" [ label = "redeem", color = "blue" ];
+  "ERC1400.redeemFrom" [ label = "redeemFrom", color = "blue" ];
+  "ERC1400.allowance" [ label = "allowance", color = "blue" ];
+  "ERC1400.isIssuable" [ label = "isIssuable", color = "blue" ];
+  "ERC1400.canTransferFrom" [ label = "canTransferFrom", color = "blue" ];
+  "ERC1400.canTransfer" [ label = "canTransfer", color = "blue" ];
+  "ERC1400.name" [ label = "name", color = "green" ];
+  "ERC1400.symbol" [ label = "symbol", color = "green" ];
+  "ERC1400.decimals" [ label = "decimals", color = "green" ];
+  "ERC1400._transferFromWithData" [ label = "_transferFromWithData" ];
+  "ERC1400.toUpper" [ label = "toUpper" ];
+  "ERC1400.isSafeAddress" [ label = "isSafeAddress" ];
+  "ERC1400._redeemByPartition" [ label = "_redeemByPartition" ];
+  "ERC1400._canTransferByPartition" [ label = "_canTransferByPartition" ];
+}
+
+subgraph "clusterERC1410" {
+  graph [ label = "ERC1410", color = "lightgray", style = "filled" ];
+  "ERC1410._transferByPartition" [ label = "_transferByPartition", color = "white" ];
+  "ERC1410._issueByPartition" [ label = "_issueByPartition", color = "white" ];
+  "ERC1410._isIssuable" [ label = "_isIssuable", color = "white" ];
+  "ERC1410.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "ERC1410.onlyController" [ label = "onlyController", color = "yellow" ];
+  "ERC1410.onlyIfControllable" [ label = "onlyIfControllable", color = "yellow" ];
+  "ERC1410.onlyIfIssuanceEnabled" [ label = "onlyIfIssuanceEnabled", color = "yellow" ];
+  "ERC1410.onlyIfNotPaused" [ label = "onlyIfNotPaused", color = "yellow" ];
+  "ERC1410.validOperatorAddressOnly" [ label = "validOperatorAddressOnly", color = "yellow" ];
+  "ERC1410.finalizeControllable" [ label = "finalizeControllable", color = "blue" ];
+  "ERC1410.authorizeOperator" [ label = "authorizeOperator", color = "blue" ];
+  "ERC1410.revokeOperator" [ label = "revokeOperator", color = "blue" ];
+  "ERC1410.authorizeOperatorByPartition" [ label = "authorizeOperatorByPartition", color = "blue" ];
+  "ERC1410.revokeOperatorByPartition" [ label = "revokeOperatorByPartition", color = "blue" ];
+  "ERC1410.issueByPartition" [ label = "issueByPartition", color = "blue" ];
+  "ERC1410.redeemByPartition" [ label = "redeemByPartition", color = "blue" ];
+  "ERC1410.transferByPartition" [ label = "transferByPartition", color = "blue" ];
+  "ERC1410.operatorTransferByPartition" [ label = "operatorTransferByPartition", color = "blue" ];
+  "ERC1410.operatorRedeemByPartition" [ label = "operatorRedeemByPartition", color = "blue" ];
+  "ERC1410.controllerTransfer" [ label = "controllerTransfer", color = "blue" ];
+  "ERC1410.controllerRedeem" [ label = "controllerRedeem", color = "blue" ];
+  "ERC1410.isControllable" [ label = "isControllable", color = "blue" ];
+  "ERC1410.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "ERC1410.balanceOfByPartition" [ label = "balanceOfByPartition", color = "blue" ];
+  "ERC1410.partitionsOf" [ label = "partitionsOf", color = "blue" ];
+  "ERC1410.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "ERC1410.isOperator" [ label = "isOperator" ];
+  "ERC1410.isOperatorForPartition" [ label = "isOperatorForPartition" ];
+  "ERC1410.canTransferByPartition" [ label = "canTransferByPartition", color = "blue" ];
+  "ERC1410.isController" [ label = "isController", color = "green" ];
+  "ERC1410.pause" [ label = "pause", color = "green" ];
+  "ERC1410.unPause" [ label = "unPause", color = "green" ];
+  "ERC1410.isPaused" [ label = "isPaused", color = "green" ];
+  "ERC1410.canPause" [ label = "canPause" ];
+  "ERC1410.canIssue" [ label = "canIssue" ];
+  "ERC1410.canRedeem" [ label = "canRedeem" ];
+  "ERC1410.canFreezeMinting" [ label = "canFreezeMinting" ];
+  "ERC1410.bytes32ToString" [ label = "bytes32ToString" ];
+  "ERC1410.toUpper" [ label = "toUpper", color = "white" ];
+  "ERC1410._isValidPartition" [ label = "_isValidPartition" ];
+  "ERC1410._validateTokenTransfer" [ label = "_validateTokenTransfer" ];
+  "ERC1410._redeemByPartition" [ label = "_redeemByPartition" ];
+  "ERC1410._operatorTransferByPartition" [ label = "_operatorTransferByPartition" ];
+  "ERC1410._operatorRedeemByPartition" [ label = "_operatorRedeemByPartition" ];
+  "ERC1410._canTransferByPartition" [ label = "_canTransferByPartition" ];
+  "ERC1410.isSafeAddress" [ label = "isSafeAddress" ];
+  "ERC1410._isControllable" [ label = "_isControllable" ];
+  "ERC1410._isController" [ label = "_isController" ];
+  "ERC1410._freezeMinting" [ label = "_freezeMinting", color = "red" ];
+  "ERC1410._runBasicValidations" [ label = "_runBasicValidations" ];
+  "ERC1410.requireValidTransfer" [ label = "requireValidTransfer" ];
+  "ERC1410._deletePartitionForHolder" [ label = "_deletePartitionForHolder" ];
+}
+
+subgraph "clusterIERC1410" {
+  graph [ label = "IERC1410", color = "lightgray", style = "filled" ];
+  "IERC1410.transferByPartition" [ label = "transferByPartition", color = "blue" ];
+  "IERC1410.operatorTransferByPartition" [ label = "operatorTransferByPartition", color = "blue" ];
+  "IERC1410.authorizeOperator" [ label = "authorizeOperator", color = "blue" ];
+  "IERC1410.revokeOperator" [ label = "revokeOperator", color = "blue" ];
+  "IERC1410.authorizeOperatorByPartition" [ label = "authorizeOperatorByPartition", color = "blue" ];
+  "IERC1410.revokeOperatorByPartition" [ label = "revokeOperatorByPartition", color = "blue" ];
+  "IERC1410.issueByPartition" [ label = "issueByPartition", color = "blue" ];
+  "IERC1410.redeemByPartition" [ label = "redeemByPartition", color = "blue" ];
+  "IERC1410.operatorRedeemByPartition" [ label = "operatorRedeemByPartition", color = "blue" ];
+  "IERC1410.balanceOf" [ label = "balanceOf", color = "blue" ];
+  "IERC1410.balanceOfByPartition" [ label = "balanceOfByPartition", color = "blue" ];
+  "IERC1410.partitionsOf" [ label = "partitionsOf", color = "blue" ];
+  "IERC1410.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "IERC1410.isOperator" [ label = "isOperator", color = "blue" ];
+  "IERC1410.isOperatorForPartition" [ label = "isOperatorForPartition", color = "blue" ];
+  "IERC1410.canTransferByPartition" [ label = "canTransferByPartition", color = "blue" ];
+}
+
+subgraph "clusterIERC1594" {
+  graph [ label = "IERC1594", color = "lightgray", style = "filled" ];
+  "IERC1594.transferWithData" [ label = "transferWithData", color = "blue" ];
+  "IERC1594.transferFromWithData" [ label = "transferFromWithData", color = "blue" ];
+  "IERC1594.redeem" [ label = "redeem", color = "blue" ];
+  "IERC1594.redeemFrom" [ label = "redeemFrom", color = "blue" ];
+  "IERC1594.issue" [ label = "issue", color = "blue" ];
+  "IERC1594.isIssuable" [ label = "isIssuable", color = "blue" ];
+  "IERC1594.canTransfer" [ label = "canTransfer", color = "blue" ];
+  "IERC1594.canTransferFrom" [ label = "canTransferFrom", color = "blue" ];
+}
+
+subgraph "clusterERC1643" {
+  graph [ label = "ERC1643", color = "lightgray", style = "filled" ];
+  "ERC1643.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "ERC1643.setDocument" [ label = "setDocument", color = "blue" ];
+  "ERC1643.removeDocument" [ label = "removeDocument", color = "blue" ];
+  "ERC1643.getDocument" [ label = "getDocument", color = "blue" ];
+  "ERC1643.getAllDocuments" [ label = "getAllDocuments", color = "blue" ];
+}
+
+subgraph "clusterIERC1643" {
+  graph [ label = "IERC1643", color = "lightgray", style = "filled" ];
+  "IERC1643.setDocument" [ label = "setDocument", color = "blue" ];
+  "IERC1643.removeDocument" [ label = "removeDocument", color = "blue" ];
+  "IERC1643.getDocument" [ label = "getDocument", color = "blue" ];
+  "IERC1643.getAllDocuments" [ label = "getAllDocuments", color = "blue" ];
+}
+
+subgraph "clusterIERC1644" {
+  graph [ label = "IERC1644", color = "lightgray", style = "filled" ];
+  "IERC1644.controllerTransfer" [ label = "controllerTransfer", color = "blue" ];
+  "IERC1644.controllerRedeem" [ label = "controllerRedeem", color = "blue" ];
+  "IERC1644.isControllable" [ label = "isControllable", color = "blue" ];
+}
+
+subgraph "clusterIERC20" {
+  graph [ label = "IERC20", color = "lightgray", style = "filled" ];
+  "IERC20.transfer" [ label = "transfer" ];
+  "IERC20.transferFrom" [ label = "transferFrom", color = "blue" ];
+  "IERC20.approve" [ label = "approve", color = "blue" ];
+  "IERC20.totalSupply" [ label = "totalSupply", color = "blue" ];
+  "IERC20.balanceOf" [ label = "balanceOf" ];
+  "IERC20.allowance" [ label = "allowance", color = "blue" ];
+}
+
+subgraph "clusterInterestDistribution" {
+  graph [ label = "InterestDistribution", color = "lightgray", style = "filled" ];
+  "InterestDistribution.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "InterestDistribution.<Fallback>" [ label = "<Fallback>", color = "blue" ];
+  "InterestDistribution.withdrawInterest" [ label = "withdrawInterest", color = "blue" ];
+  "InterestDistribution.setInterestPaymentforWithdrawals" [ label = "setInterestPaymentforWithdrawals", color = "blue" ];
+  "InterestDistribution.transferInterestPaymentByOwner" [ label = "transferInterestPaymentByOwner", color = "blue" ];
+  "InterestDistribution.adjustInterestPaymentforAnInvestor" [ label = "adjustInterestPaymentforAnInvestor", color = "blue" ];
+  "InterestDistribution.withdrawByOwner" [ label = "withdrawByOwner", color = "blue" ];
+  "InterestDistribution.canSetOrTransferInterestPayment" [ label = "canSetOrTransferInterestPayment" ];
+  "InterestDistribution.makeInterestPaymentinEthers" [ label = "makeInterestPaymentinEthers" ];
+  "InterestDistribution.makeInterestPaymentinTokens" [ label = "makeInterestPaymentinTokens" ];
+  "InterestDistribution.validateInterestPaymentinEthers" [ label = "validateInterestPaymentinEthers" ];
+  "InterestDistribution.validateInterestPaymentinTokens" [ label = "validateInterestPaymentinTokens" ];
+}
+
+subgraph "clusterIInterestDistribution" {
+  graph [ label = "IInterestDistribution", color = "lightgray", style = "filled" ];
+  "IInterestDistribution.withdrawInterest" [ label = "withdrawInterest", color = "blue" ];
+  "IInterestDistribution.setInterestPaymentforWithdrawals" [ label = "setInterestPaymentforWithdrawals", color = "blue" ];
+  "IInterestDistribution.transferInterestPaymentByOwner" [ label = "transferInterestPaymentByOwner", color = "blue" ];
+  "IInterestDistribution.adjustInterestPaymentforAnInvestor" [ label = "adjustInterestPaymentforAnInvestor", color = "blue" ];
+  "IInterestDistribution.withdrawByOwner" [ label = "withdrawByOwner", color = "blue" ];
+}
+
+subgraph "clusterKindMath" {
+  graph [ label = "KindMath", color = "lightgray", style = "filled" ];
+  "KindMath.checkSub" [ label = "checkSub", color = "white" ];
+  "KindMath.checkAdd" [ label = "checkAdd", color = "white" ];
+  "KindMath.checkMul" [ label = "checkMul", color = "white" ];
+}
+
+subgraph "clusterSafeMath" {
+  graph [ label = "SafeMath", color = "lightgray", style = "filled" ];
+  "SafeMath.mul" [ label = "mul", color = "white" ];
+  "SafeMath.div" [ label = "div", color = "white" ];
+  "SafeMath.sub" [ label = "sub", color = "white" ];
+  "SafeMath.add" [ label = "add", color = "white" ];
+  "SafeMath.mod" [ label = "mod", color = "white" ];
+}
+
+subgraph "clusterMigrations" {
+  graph [ label = "Migrations", color = "lightgray", style = "filled" ];
+  "Migrations.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "Migrations.restricted" [ label = "restricted", color = "yellow" ];
+  "Migrations.setCompleted" [ label = "setCompleted" ];
+  "Migrations.upgrade" [ label = "upgrade", color = "green" ];
+}
+
+subgraph "clusterOwnableNonTransferable" {
+  graph [ label = "OwnableNonTransferable", color = "lightgray", style = "filled" ];
+  "OwnableNonTransferable.<Constructor>" [ label = "<Constructor>", color = "white" ];
+  "OwnableNonTransferable.owner" [ label = "owner", color = "green" ];
+  "OwnableNonTransferable.onlyContractOwner" [ label = "onlyContractOwner", color = "yellow" ];
+  "OwnableNonTransferable.onlyOwner" [ label = "onlyOwner", color = "yellow" ];
+  "OwnableNonTransferable.isOwner" [ label = "isOwner" ];
+}
+
+subgraph "clusterSecurityToken" {
+  graph [ label = "SecurityToken", color = "lightgray", style = "filled" ];
+  "SecurityToken.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "ERC1410.canPause" [ label = "canPause", color = "green" ];
+  "ERC1410.canIssue" [ label = "canIssue", color = "green" ];
+  "ERC1410.canRedeem" [ label = "canRedeem", color = "green" ];
+  "ERC1410.canFreezeMinting" [ label = "canFreezeMinting", color = "green" ];
+  "SecurityToken.isWhitelisted" [ label = "isWhitelisted", color = "green" ];
+  "ERC1410._validateTokenTransfer" [ label = "_validateTokenTransfer", color = "white" ];
+}
+
+subgraph "clusterERC20Basic" {
+  graph [ label = "ERC20Basic", color = "lightgray", style = "filled" ];
+  "ERC20Basic.totalSupply" [ label = "totalSupply", color = "green" ];
+  "ERC20Basic.balanceOf" [ label = "balanceOf", color = "green" ];
+  "ERC20Basic.transfer" [ label = "transfer", color = "green" ];
+}
+
+subgraph "clusterERC20" {
+  graph [ label = "ERC20", color = "lightgray", style = "filled" ];
+  "ERC20.allowance" [ label = "allowance", color = "green" ];
+  "ERC20.transferFrom" [ label = "transferFrom", color = "green" ];
+  "ERC20.approve" [ label = "approve", color = "green" ];
+}
+
+subgraph "clusterBasicToken" {
+  graph [ label = "BasicToken", color = "lightgray", style = "filled" ];
+  "BasicToken.totalSupply" [ label = "totalSupply", color = "green" ];
+  "BasicToken._transfer" [ label = "_transfer" ];
+  "BasicToken.transfer" [ label = "transfer", color = "green" ];
+  "BasicToken.balanceOf" [ label = "balanceOf", color = "green" ];
+}
+
+subgraph "clusterTestPaymentToken" {
+  graph [ label = "TestPaymentToken", color = "lightgray", style = "filled" ];
+  "TestPaymentToken.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "TestPaymentToken.transferFrom" [ label = "transferFrom", color = "green" ];
+  "TestPaymentToken.approve" [ label = "approve", color = "green" ];
+  "TestPaymentToken.allowance" [ label = "allowance", color = "green" ];
+}
+
+subgraph "clusterTokenVoting" {
+  graph [ label = "TokenVoting", color = "lightgray", style = "filled" ];
+  "TokenVoting.controllableTokenOnly" [ label = "controllableTokenOnly", color = "yellow" ];
+  "TokenVoting.createVote" [ label = "createVote", color = "green" ];
+  "TokenVoting.appendVoters" [ label = "appendVoters", color = "green" ];
+  "TokenVoting.submitVote" [ label = "submitVote", color = "green" ];
+  "TokenVoting.closeVoteManually" [ label = "closeVoteManually", color = "green" ];
+  "TokenVoting.votingIsClosed" [ label = "votingIsClosed" ];
+  "TokenVoting.requiresDeadline" [ label = "requiresDeadline" ];
+  "TokenVoting.getVotingOptions" [ label = "getVotingOptions", color = "green" ];
+  "TokenVoting.getVote" [ label = "getVote", color = "green" ];
+  "TokenVoting.getStats" [ label = "getStats", color = "green" ];
+  "TokenVoting.getVotes" [ label = "getVotes", color = "green" ];
+  "TokenVoting.canRevealResults" [ label = "canRevealResults" ];
+  "TokenVoting.isValidContext" [ label = "isValidContext" ];
+  "TokenVoting.isValidVotingOption" [ label = "isValidVotingOption" ];
+  "TokenVoting.isValidVoter" [ label = "isValidVoter" ];
+  "TokenVoting.hasVoted" [ label = "hasVoted" ];
+}
+
+subgraph "clusterFungibleWhitelist" {
+  graph [ label = "FungibleWhitelist", color = "lightgray", style = "filled" ];
+  "FungibleWhitelist.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "FungibleWhitelist.onlyWhitelistOperator" [ label = "onlyWhitelistOperator", color = "yellow" ];
+  "FungibleWhitelist.addVerified" [ label = "addVerified", color = "blue" ];
+  "FungibleWhitelist.removeVerified" [ label = "removeVerified", color = "blue" ];
+  "FungibleWhitelist.updateVerified" [ label = "updateVerified", color = "blue" ];
+  "FungibleWhitelist.addVerifiedAsBulk" [ label = "addVerifiedAsBulk", color = "blue" ];
+  "FungibleWhitelist.isWhitelistOperator" [ label = "isWhitelistOperator" ];
+  "FungibleWhitelist.hasHash" [ label = "hasHash", color = "blue" ];
+  "FungibleWhitelist.isWhitelisted" [ label = "isWhitelisted", color = "blue" ];
+  "FungibleWhitelist._addVerified" [ label = "_addVerified" ];
+}
+
+subgraph "clusterDefaultSecurityTokenWhitelist" {
+  graph [ label = "DefaultSecurityTokenWhitelist", color = "lightgray", style = "filled" ];
+  "DefaultSecurityTokenWhitelist.isMemberOf" [ label = "isMemberOf", color = "green" ];
+  "DefaultSecurityTokenWhitelist.isWhitelisted" [ label = "isWhitelisted" ];
+  "DefaultSecurityTokenWhitelist.<Constructor>" [ label = "<Constructor>", color = "green" ];
+  "FungibleWhitelist.isWhitelistOperator" [ label = "isWhitelistOperator", color = "blue" ];
+}
+
+subgraph "clusterIFungibleWhitelist" {
+  graph [ label = "IFungibleWhitelist", color = "lightgray", style = "filled" ];
+  "IFungibleWhitelist.addVerified" [ label = "addVerified", color = "blue" ];
+  "IFungibleWhitelist.removeVerified" [ label = "removeVerified", color = "blue" ];
+  "IFungibleWhitelist.updateVerified" [ label = "updateVerified", color = "blue" ];
+  "IFungibleWhitelist.addVerifiedAsBulk" [ label = "addVerifiedAsBulk", color = "blue" ];
+  "IFungibleWhitelist.isWhitelistOperator" [ label = "isWhitelistOperator", color = "blue" ];
+  "IFungibleWhitelist.hasHash" [ label = "hasHash", color = "blue" ];
+  "IFungibleWhitelist.isWhitelisted" [ label = "isWhitelisted", color = "blue" ];
+}
+
+subgraph "cluster_totalSupply" {
+  graph [ label = "_totalSupply", color = "lightgray" ];
+  "_totalSupply.add" [ label = "add" ];
+  "_totalSupply.sub" [ label = "sub" ];
+}
+
+subgraph "clusterinvestor" {
+  graph [ label = "investor", color = "lightgray" ];
+  "investor.transfer" [ label = "transfer" ];
+}
+
+  "PlatformProviderRbac.onlyLevel1";
+  "PlatformProviderRbac.isLevel1";
+  "PlatformProviderRbac.onlyLevel2";
+  "PlatformProviderRbac.isLevel2";
+  "PlatformProviderRbac.addToLevel1";
+  "PlatformProviderRbac.addToRole";
+  "PlatformProviderRbac.addToLevel2";
+  "PlatformProviderRbac.removeFromLevel1";
+  "PlatformProviderRbac.removeFromRole";
+  "PlatformProviderRbac.removeFromLevel2";
+  "PlatformProviderRbac.isMemberOf";
+  "RoleBasedAccessControl.onlySecurityOperator";
+  "RoleBasedAccessControl.isSecurityOperator";
+  "RoleBasedAccessControl.addOperator";
+  "RoleBasedAccessControl.removeOperator";
+  "RoleBasedAccessControl.addToRole";
+  "RoleBasedAccessControl.isMemberOf";
+  "RoleBasedAccessControl.removeFromRole";
+  "ERC1400.null";
+  "ERC1400.toUpper";
+  "ERC1400.transfer";
+  "ERC1410._transferByPartition";
+  "ERC1400.transferFrom";
+  "ERC1400._transferFromWithData";
+  "ERC1400.approve";
+  "ERC1400.isSafeAddress";
+  "ERC1400.issue";
+  "ERC1410._issueByPartition";
+  "ERC1400.transferFromWithData";
+  "ERC1400.transferWithData";
+  "ERC1400.redeem";
+  "ERC1400._redeemByPartition";
+  "ERC1400.redeemFrom";
+  "ERC1400.isIssuable";
+  "ERC1410._isIssuable";
+  "ERC1400.canTransferFrom";
+  "ERC1400._canTransferByPartition";
+  "ERC1400.canTransfer";
+  "ERC1410.onlyController";
+  "ERC1410.isSafeAddress";
+  "ERC1410.onlyIfControllable";
+  "ERC1410._isControllable";
+  "ERC1410.onlyIfIssuanceEnabled";
+  "ERC1410.validOperatorAddressOnly";
+  "ERC1410.issueByPartition";
+  "ERC1410.redeemByPartition";
+  "ERC1410._redeemByPartition";
+  "ERC1410.transferByPartition";
+  "ERC1410.operatorTransferByPartition";
+  "ERC1410._operatorTransferByPartition";
+  "ERC1410.operatorRedeemByPartition";
+  "ERC1410._operatorRedeemByPartition";
+  "ERC1410.controllerTransfer";
+  "ERC1410.controllerRedeem";
+  "ERC1410.isControllable";
+  "ERC1410.balanceOfByPartition";
+  "ERC1410._isValidPartition";
+  "ERC1410.canTransferByPartition";
+  "ERC1410._canTransferByPartition";
+  "ERC1410.isController";
+  "ERC1410._isController";
+  "ERC1410.pause";
+  "ERC1410.canPause";
+  "ERC1410.unPause";
+  "ERC1410.canIssue";
+  "_totalSupply.add";
+  "ERC1410.requireValidTransfer";
+  "ERC1410.canRedeem";
+  "ERC1410._deletePartitionForHolder";
+  "_totalSupply.sub";
+  "ERC1410.isOperator";
+  "ERC1410.isOperatorForPartition";
+  "ERC1410._runBasicValidations";
+  "ERC1410._validateTokenTransfer";
+  "ERC1410._freezeMinting";
+  "ERC1410.canFreezeMinting";
+  "KindMath.checkSub";
+  "KindMath.checkAdd";
+  "ERC1410.bytes32ToString";
+  "InterestDistribution.withdrawInterest";
+  "InterestDistribution.makeInterestPaymentinEthers";
+  "InterestDistribution.makeInterestPaymentinTokens";
+  "InterestDistribution.setInterestPaymentforWithdrawals";
+  "InterestDistribution.canSetOrTransferInterestPayment";
+  "InterestDistribution.transferInterestPaymentByOwner";
+  "InterestDistribution.validateInterestPaymentinEthers";
+  "investor.transfer";
+  "InterestDistribution.validateInterestPaymentinTokens";
+  "IERC20.transfer";
+  "InterestDistribution.adjustInterestPaymentforAnInvestor";
+  "InterestDistribution.withdrawByOwner";
+  "IERC20.balanceOf";
+  "DefaultSecurityTokenWhitelist.isMemberOf";
+  "Migrations.upgrade";
+  "Migrations.setCompleted";
+  "OwnableNonTransferable.onlyContractOwner";
+  "OwnableNonTransferable.isOwner";
+  "OwnableNonTransferable.onlyOwner";
+  "SecurityToken.isWhitelisted";
+  "DefaultSecurityTokenWhitelist.isWhitelisted";
+  "BasicToken.transfer";
+  "BasicToken._transfer";
+  "TokenVoting.controllableTokenOnly";
+  "TokenVoting.createVote";
+  "TokenVoting.isValidContext";
+  "TokenVoting.appendVoters";
+  "TokenVoting.votingIsClosed";
+  "TokenVoting.submitVote";
+  "TokenVoting.isValidVoter";
+  "TokenVoting.hasVoted";
+  "TokenVoting.isValidVotingOption";
+  "TokenVoting.getVote";
+  "TokenVoting.canRevealResults";
+  "TokenVoting.getStats";
+  "TokenVoting.getVotes";
+  "TokenVoting.requiresDeadline";
+  "FungibleWhitelist.onlyWhitelistOperator";
+  "FungibleWhitelist.isWhitelistOperator";
+  "FungibleWhitelist.addVerified";
+  "FungibleWhitelist._addVerified";
+  "FungibleWhitelist.addVerifiedAsBulk";
+  "PlatformProviderRbac.onlyLevel1" -> "PlatformProviderRbac.isLevel1" [ color = "green" ];
+  "PlatformProviderRbac.onlyLevel2" -> "PlatformProviderRbac.isLevel2" [ color = "green" ];
+  "PlatformProviderRbac.addToLevel1" -> "PlatformProviderRbac.addToRole" [ color = "green" ];
+  "PlatformProviderRbac.addToLevel2" -> "PlatformProviderRbac.addToRole" [ color = "green" ];
+  "PlatformProviderRbac.removeFromLevel1" -> "PlatformProviderRbac.removeFromRole" [ color = "green" ];
+  "PlatformProviderRbac.removeFromLevel2" -> "PlatformProviderRbac.removeFromRole" [ color = "green" ];
+  "PlatformProviderRbac.isLevel1" -> "PlatformProviderRbac.isMemberOf" [ color = "green" ];
+  "PlatformProviderRbac.isLevel2" -> "PlatformProviderRbac.isMemberOf" [ color = "green" ];
+  "RoleBasedAccessControl.onlySecurityOperator" -> "RoleBasedAccessControl.isSecurityOperator" [ color = "green" ];
+  "RoleBasedAccessControl.addOperator" -> "RoleBasedAccessControl.isSecurityOperator" [ color = "green" ];
+  "RoleBasedAccessControl.removeOperator" -> "RoleBasedAccessControl.isSecurityOperator" [ color = "green" ];
+  "RoleBasedAccessControl.addToRole" -> "RoleBasedAccessControl.isMemberOf" [ color = "green" ];
+  "RoleBasedAccessControl.removeFromRole" -> "RoleBasedAccessControl.isMemberOf" [ color = "green" ];
+  "ERC1400.null" -> "ERC1400.toUpper" [ color = "green" ];
+  "ERC1400.transfer" -> "ERC1410._transferByPartition" [ color = "orange" ];
+  "ERC1400.transferFrom" -> "ERC1400._transferFromWithData" [ color = "green" ];
+  "ERC1400.approve" -> "ERC1400.isSafeAddress" [ color = "green" ];
+  "ERC1400.issue" -> "ERC1410._issueByPartition" [ color = "orange" ];
+  "ERC1400.transferFromWithData" -> "ERC1400._transferFromWithData" [ color = "green" ];
+  "ERC1400.transferWithData" -> "ERC1410._transferByPartition" [ color = "orange" ];
+  "ERC1400.redeem" -> "ERC1400._redeemByPartition" [ color = "green" ];
+  "ERC1400.redeemFrom" -> "ERC1400._redeemByPartition" [ color = "green" ];
+  "ERC1400.isIssuable" -> "ERC1410._isIssuable" [ color = "orange" ];
+  "ERC1400.canTransferFrom" -> "ERC1400._canTransferByPartition" [ color = "green" ];
+  "ERC1400.canTransfer" -> "ERC1400._canTransferByPartition" [ color = "green" ];
+  "ERC1400._transferFromWithData" -> "ERC1410._transferByPartition" [ color = "orange" ];
+  "ERC1410.onlyController" -> "ERC1410.isSafeAddress" [ color = "green" ];
+  "ERC1410.onlyIfControllable" -> "ERC1410._isControllable" [ color = "green" ];
+  "ERC1410.onlyIfIssuanceEnabled" -> "ERC1410._isIssuable" [ color = "green" ];
+  "ERC1410.validOperatorAddressOnly" -> "ERC1410.isSafeAddress" [ color = "green" ];
+  "ERC1410.issueByPartition" -> "ERC1410._issueByPartition" [ color = "green" ];
+  "ERC1410.redeemByPartition" -> "ERC1410._redeemByPartition" [ color = "green" ];
+  "ERC1410.transferByPartition" -> "ERC1410._transferByPartition" [ color = "green" ];
+  "ERC1410.operatorTransferByPartition" -> "ERC1410._operatorTransferByPartition" [ color = "green" ];
+  "ERC1410.operatorRedeemByPartition" -> "ERC1410._operatorRedeemByPartition" [ color = "green" ];
+  "ERC1410.controllerTransfer" -> "ERC1410._transferByPartition" [ color = "green" ];
+  "ERC1410.controllerRedeem" -> "ERC1410._redeemByPartition" [ color = "green" ];
+  "ERC1410.isControllable" -> "ERC1410._isControllable" [ color = "green" ];
+  "ERC1410.balanceOfByPartition" -> "ERC1410._isValidPartition" [ color = "green" ];
+  "ERC1410.canTransferByPartition" -> "ERC1410._canTransferByPartition" [ color = "green" ];
+  "ERC1410.isController" -> "ERC1410._isController" [ color = "green" ];
+  "ERC1410.pause" -> "ERC1410.canPause" [ color = "green" ];
+  "ERC1410.unPause" -> "ERC1410.canPause" [ color = "green" ];
+  "ERC1410._issueByPartition" -> "ERC1410.isSafeAddress" [ color = "green" ];
+  "ERC1410._issueByPartition" -> "ERC1410.canIssue" [ color = "green" ];
+  "ERC1410._issueByPartition" -> "_totalSupply.add" [ color = "orange" ];
+  "ERC1410._isValidPartition" -> "ERC1410.isSafeAddress" [ color = "green" ];
+  "ERC1410._transferByPartition" -> "ERC1410.requireValidTransfer" [ color = "green" ];
+  "ERC1410._redeemByPartition" -> "ERC1410.isSafeAddress" [ color = "green" ];
+  "ERC1410._redeemByPartition" -> "ERC1410._isValidPartition" [ color = "green" ];
+  "ERC1410._redeemByPartition" -> "ERC1410._isController" [ color = "green" ];
+  "ERC1410._redeemByPartition" -> "ERC1410.canRedeem" [ color = "green" ];
+  "ERC1410._redeemByPartition" -> "ERC1410._deletePartitionForHolder" [ color = "green" ];
+  "ERC1410._redeemByPartition" -> "_totalSupply.sub" [ color = "orange" ];
+  "ERC1410._operatorTransferByPartition" -> "ERC1410.isSafeAddress" [ color = "green" ];
+  "ERC1410._operatorTransferByPartition" -> "ERC1410.isSafeAddress" [ color = "green" ];
+  "ERC1410._operatorTransferByPartition" -> "ERC1410.isOperator" [ color = "green" ];
+  "ERC1410._operatorTransferByPartition" -> "ERC1410.isOperatorForPartition" [ color = "green" ];
+  "ERC1410._operatorTransferByPartition" -> "ERC1410._transferByPartition" [ color = "green" ];
+  "ERC1410._operatorRedeemByPartition" -> "ERC1410.isSafeAddress" [ color = "green" ];
+  "ERC1410._operatorRedeemByPartition" -> "ERC1410.isOperator" [ color = "green" ];
+  "ERC1410._operatorRedeemByPartition" -> "ERC1410.isOperatorForPartition" [ color = "green" ];
+  "ERC1410._operatorRedeemByPartition" -> "ERC1410._redeemByPartition" [ color = "green" ];
+  "ERC1410._canTransferByPartition" -> "ERC1410._runBasicValidations" [ color = "green" ];
+  "ERC1410._canTransferByPartition" -> "ERC1410._isController" [ color = "green" ];
+  "ERC1410._canTransferByPartition" -> "ERC1410._validateTokenTransfer" [ color = "green" ];
+  "ERC1410._isController" -> "ERC1410._isControllable" [ color = "green" ];
+  "ERC1410._isController" -> "ERC1410.isSafeAddress" [ color = "green" ];
+  "ERC1410._freezeMinting" -> "ERC1410.canFreezeMinting" [ color = "green" ];
+  "ERC1410._runBasicValidations" -> "ERC1410.isSafeAddress" [ color = "green" ];
+  "ERC1410._runBasicValidations" -> "ERC1410.isSafeAddress" [ color = "green" ];
+  "ERC1410._runBasicValidations" -> "ERC1410._isValidPartition" [ color = "green" ];
+  "ERC1410._runBasicValidations" -> "KindMath.checkSub" [ color = "orange" ];
+  "ERC1410._runBasicValidations" -> "KindMath.checkAdd" [ color = "orange" ];
+  "ERC1410.requireValidTransfer" -> "ERC1410._canTransferByPartition" [ color = "green" ];
+  "ERC1410.requireValidTransfer" -> "ERC1410.bytes32ToString" [ color = "green" ];
+  "InterestDistribution.withdrawInterest" -> "InterestDistribution.makeInterestPaymentinEthers" [ color = "green" ];
+  "InterestDistribution.withdrawInterest" -> "InterestDistribution.makeInterestPaymentinTokens" [ color = "green" ];
+  "InterestDistribution.setInterestPaymentforWithdrawals" -> "InterestDistribution.canSetOrTransferInterestPayment" [ color = "green" ];
+  "InterestDistribution.transferInterestPaymentByOwner" -> "InterestDistribution.validateInterestPaymentinEthers" [ color = "green" ];
+  "InterestDistribution.transferInterestPaymentByOwner" -> "investor.transfer" [ color = "orange" ];
+  "InterestDistribution.transferInterestPaymentByOwner" -> "InterestDistribution.validateInterestPaymentinTokens" [ color = "green" ];
+  "InterestDistribution.transferInterestPaymentByOwner" -> "IERC20.transfer" [ color = "orange" ];
+  "InterestDistribution.adjustInterestPaymentforAnInvestor" -> "InterestDistribution.canSetOrTransferInterestPayment" [ color = "green" ];
+  "InterestDistribution.withdrawByOwner" -> "IERC20.balanceOf" [ color = "orange" ];
+  "InterestDistribution.withdrawByOwner" -> "IERC20.transfer" [ color = "orange" ];
+  "InterestDistribution.canSetOrTransferInterestPayment" -> "DefaultSecurityTokenWhitelist.isMemberOf" [ color = "orange" ];
+  "InterestDistribution.makeInterestPaymentinEthers" -> "InterestDistribution.validateInterestPaymentinEthers" [ color = "green" ];
+  "InterestDistribution.makeInterestPaymentinTokens" -> "InterestDistribution.validateInterestPaymentinTokens" [ color = "green" ];
+  "InterestDistribution.makeInterestPaymentinTokens" -> "IERC20.transfer" [ color = "orange" ];
+  "InterestDistribution.validateInterestPaymentinTokens" -> "IERC20.balanceOf" [ color = "orange" ];
+  "Migrations.upgrade" -> "Migrations.setCompleted" [ color = "orange" ];
+  "OwnableNonTransferable.onlyContractOwner" -> "OwnableNonTransferable.isOwner" [ color = "green" ];
+  "OwnableNonTransferable.onlyOwner" -> "OwnableNonTransferable.isOwner" [ color = "green" ];
+  "ERC1410.canPause" -> "DefaultSecurityTokenWhitelist.isMemberOf" [ color = "orange" ];
+  "ERC1410.canIssue" -> "DefaultSecurityTokenWhitelist.isMemberOf" [ color = "orange" ];
+  "ERC1410.canRedeem" -> "DefaultSecurityTokenWhitelist.isMemberOf" [ color = "orange" ];
+  "ERC1410.canFreezeMinting" -> "DefaultSecurityTokenWhitelist.isMemberOf" [ color = "orange" ];
+  "SecurityToken.isWhitelisted" -> "DefaultSecurityTokenWhitelist.isWhitelisted" [ color = "orange" ];
+  "ERC1410._validateTokenTransfer" -> "DefaultSecurityTokenWhitelist.isWhitelisted" [ color = "orange" ];
+  "ERC1410._validateTokenTransfer" -> "DefaultSecurityTokenWhitelist.isWhitelisted" [ color = "orange" ];
+  "BasicToken.transfer" -> "BasicToken._transfer" [ color = "green" ];
+  "TokenVoting.controllableTokenOnly" -> "ERC1410.isControllable" [ color = "orange" ];
+  "TokenVoting.controllableTokenOnly" -> "ERC1410.isController" [ color = "orange" ];
+  "TokenVoting.createVote" -> "TokenVoting.isValidContext" [ color = "green" ];
+  "TokenVoting.appendVoters" -> "TokenVoting.isValidContext" [ color = "green" ];
+  "TokenVoting.appendVoters" -> "TokenVoting.votingIsClosed" [ color = "green" ];
+  "TokenVoting.submitVote" -> "TokenVoting.isValidContext" [ color = "green" ];
+  "TokenVoting.submitVote" -> "TokenVoting.isValidVoter" [ color = "green" ];
+  "TokenVoting.submitVote" -> "TokenVoting.hasVoted" [ color = "green" ];
+  "TokenVoting.submitVote" -> "TokenVoting.isValidVotingOption" [ color = "green" ];
+  "TokenVoting.submitVote" -> "TokenVoting.votingIsClosed" [ color = "green" ];
+  "TokenVoting.getVote" -> "TokenVoting.canRevealResults" [ color = "green" ];
+  "TokenVoting.getStats" -> "TokenVoting.canRevealResults" [ color = "green" ];
+  "TokenVoting.getVotes" -> "TokenVoting.canRevealResults" [ color = "green" ];
+  "TokenVoting.canRevealResults" -> "TokenVoting.requiresDeadline" [ color = "green" ];
+  "TokenVoting.canRevealResults" -> "TokenVoting.votingIsClosed" [ color = "green" ];
+  "TokenVoting.canRevealResults" -> "ERC1410.isControllable" [ color = "orange" ];
+  "TokenVoting.hasVoted" -> "TokenVoting.isValidVoter" [ color = "green" ];
+  "FungibleWhitelist.onlyWhitelistOperator" -> "FungibleWhitelist.isWhitelistOperator" [ color = "green" ];
+  "FungibleWhitelist.addVerified" -> "FungibleWhitelist._addVerified" [ color = "green" ];
+  "FungibleWhitelist.addVerifiedAsBulk" -> "FungibleWhitelist._addVerified" [ color = "green" ];
+  "FungibleWhitelist.isWhitelistOperator" -> "PlatformProviderRbac.isLevel1" [ color = "orange" ];
+  "DefaultSecurityTokenWhitelist.isMemberOf" -> "PlatformProviderRbac.isMemberOf" [ color = "orange" ];
+
+
+rankdir=LR
+node [shape=plaintext]
+subgraph cluster_01 { 
+label = "Legend";
+key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td align="right" port="i1">Internal Call</td></tr>
+  <tr><td align="right" port="i2">External Call</td></tr>
+  <tr><td align="right" port="i3">Defined Contract</td></tr>
+  <tr><td align="right" port="i4">Undefined Contract</td></tr>
+  </table>>]
+key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td port="i1">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i2">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i3" bgcolor="lightgray">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i4">
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="7" color="lightgray">
+      <tr>
+       <td></td>
+      </tr>
+     </table>
+  </td></tr>
+  </table>>]
+key:i1:e -> key2:i1:w [color=green]
+key:i2:e -> key2:i2:w [color=orange]
+}
+}
+

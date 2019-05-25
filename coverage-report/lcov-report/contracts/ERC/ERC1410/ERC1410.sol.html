@@ -1,0 +1,2579 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/ERC/ERC1410/ERC1410.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">contracts/ERC/ERC1410/</a> ERC1410.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.2% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>138/153</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">69.39% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>68/98</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">93.62% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>44/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">92.68% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>152/164</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40×</span>
+<span class="cline-any cline-yes">40×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">66×</span>
+<span class="cline-any cline-yes">64×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">41×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">704×</span>
+<span class="cline-any cline-yes">704×</span>
+<span class="cline-any cline-yes">298×</span>
+<span class="cline-any cline-yes">298×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">298×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">165×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">pragma solidity ^0.5.4;
+&nbsp;
+import "./../../math/SafeMath.sol";
+import "./../../math/KindMath.sol";
+import "./../../access/ReentrancyGuard.sol";
+import "./../ERC1643/ERC1643.sol";
+import "./../ERC1644/IERC1644.sol";
+import "./IERC1410.sol";
+&nbsp;
+/**
+ * @title This abstract contract implements the standard ERC-1410 (Partially Fungible Token Standard)
+ */
+contract ERC1410 is ReentrancyGuard, ERC1643, IERC1644, IERC1410 {
+&nbsp;
+    using SafeMath for uint256;
+&nbsp;
+    // Represents a fungible set of tokens.
+    struct Partition {
+        uint256 amount;
+        bytes32 partition;
+    }
+&nbsp;
+    // Ethereum Status Codes defined by EIP-1066 (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1066.md)
+    byte constant internal EIP1066_SUCCESS = 0x01;
+    byte constant internal EIP1066_TOKEN_TRANSFER_FAILED = 0x50;
+    byte constant internal EIP1066_TOKEN_TRANSFER_SUCCESSFUL = 0x51;
+    byte constant internal EIP1066_AWAITING_PAYMENT_FROM_OTHERS = 0x52;
+    byte constant internal EIP1066_NOT_FOUND = 0x20;
+&nbsp;
+    // Defines the default partition of all tokens
+    bytes32 internal constant DEFAULT_PARTITION = "default";
+&nbsp;
+    // Represents an empty string formatted as bytes-32 struct
+    bytes32 internal constant ZERO_BYTES32 = bytes32(0);
+    address internal constant ZERO_ADDRESS = address(0);
+&nbsp;
+    // The application identifier
+    bytes32 internal _appIdentifier;
+&nbsp;
+    // The number of tokens in existance
+    uint256 private _totalSupply;
+&nbsp;
+    // The address of the controller, which is a delegated entity set by the issuer/owner of the token
+    address private _controllerAddress;
+&nbsp;
+    // Used to permanently halt all minting
+    bool private _issuanceStopped;
+&nbsp;
+    // Used to pause or unpause trading
+    bool private _paused;
+&nbsp;
+    // Mapping from investor to aggregated balance across all investor token sets
+    mapping (address =&gt; uint256) private _balances;
+&nbsp;
+    // Mapping from investor to their partitions
+    mapping (address =&gt; Partition[]) private _partitions;
+&nbsp;
+    // Mapping from (investor, partition) to index of corresponding partition in partitions
+    // @dev Stored value is always greater by 1 to avoid the 0 value of every index
+    mapping (address =&gt; mapping (bytes32 =&gt; uint256)) private _partitionToIndex;
+&nbsp;
+    // Mapping from (investor, partition, operator) to approved status
+    mapping (address =&gt; mapping (bytes32 =&gt; mapping (address =&gt; bool))) private _partitionApprovals;
+&nbsp;
+    // Mapping from (investor, operator) to approved status (can be used against any partition)
+    mapping (address =&gt; mapping (address =&gt; bool)) private _approvals;
+&nbsp;
+    event TransferByPartition(
+        bytes32 indexed _fromPartition,
+        address _operator,
+        address indexed _from,
+        address indexed _to,
+        uint256 _value,
+        bytes _data,
+        bytes _operatorData
+    );
+&nbsp;
+    event AuthorizedOperator(address indexed operator, address indexed tokenHolder);
+    event RevokedOperator(address indexed operator, address indexed tokenHolder);
+&nbsp;
+    event AuthorizedOperatorByPartition(
+        bytes32 indexed partition, address indexed operator, address indexed tokenHolder
+    );
+&nbsp;
+    event RevokedOperatorByPartition(
+        bytes32 indexed partition, address indexed operator, address indexed tokenHolder
+    );
+&nbsp;
+    // This event is emitted when the token is no longer controllable
+    event FinalizedControllerFeature();
+&nbsp;
+    event Paused(address indexed pausedByAddress);
+    event UnPaused(address indexed unpausedByAddress);
+&nbsp;
+    /**
+     * @notice Constructor
+     * @param owner The owner of the smart contract
+     * @param controllerAddr The address of the controller delegated by the issuer
+     * @param appIdentifier The application identifier, if any
+     */
+    constructor(address owner, address controllerAddr, bytes32 appIdentifier) public ERC1643(owner) {
+        // Below condition is to restrict the owner/issuer to become the controller as well in ideal world.
+        // But for non ideal case issuer could set another address which is not the owner of the token 
+        // but issuer holds its private key.
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(controllerAddr != owner, "The owner is not allowed to become a controller");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(controllerAddr != address(this), "The contract cannot be the token controller");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(owner != address(this), "The contract cannot be the owner");
+        _controllerAddress = controllerAddr;
+&nbsp;
+        _appIdentifier = appIdentifier;
+    }
+&nbsp;
+    // Modifier to check whether the address specified is authorized or not 
+    modifier onlyController(address addr) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(isSafeAddress(addr), "Invalid controller address");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(addr == _controllerAddress, "Only controllers are allowed to execute this function");
+        _;
+    }
+&nbsp;
+    modifier onlyIfControllable() {
+        require(_isControllable(), "The security token is not controllable");
+        _;
+    }
+&nbsp;
+    // Modifier to check if issuance is enabled
+    modifier onlyIfIssuanceEnabled() {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(_isIssuable(), "Issuance has finished for the token. No new tokens can be minted or issued.");
+        _;
+    }
+&nbsp;
+    // Modifier to check if token trading is paused
+    modifier onlyIfNotPaused() {
+        require(!_paused, "Token trading is paused.");
+        _;
+    }
+&nbsp;
+    /**
+     * @notice Makes sure the operator is not an 0x0 address nor the address of the smart contract
+     * @param operator The owner of the smart contract
+     */
+    modifier validOperatorAddressOnly(address operator) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(isSafeAddress(operator), "Invalid operator address");
+        _;
+    }
+&nbsp;
+    /**
+     * @notice It is used to end the controller feature from the token
+     */
+    function finalizeControllable() external onlyOwner onlyIfControllable {
+        // The token is no longer controllable
+        _controllerAddress = ZERO_ADDRESS;
+&nbsp;
+        // Trigger the event
+        emit FinalizedControllerFeature();
+    }
+    
+    /**
+     * @notice Authorises an operator for all partitions of `msg.sender`
+     * @param operator An address which is being authorised
+     */
+    function authorizeOperator(address operator) external validOperatorAddressOnly(operator) {
+        _approvals[msg.sender][operator] = true;
+        emit AuthorizedOperator(operator, msg.sender);
+    }
+&nbsp;
+    /**
+     * @notice Revokes authorisation of an operator previously given for all partitions of `msg.sender`
+     * @param operator An address which is being de-authorised
+     */
+    function revokeOperator(address operator) external validOperatorAddressOnly(operator) {
+        _approvals[msg.sender][operator] = false;
+        emit RevokedOperator(operator, msg.sender);
+    }
+&nbsp;
+    /**
+     * @notice Authorises an operator for a given partition of `msg.sender`
+     * @param partition The partition to which the operator is authorised
+     * @param operator An address which is being authorised
+     */
+    function authorizeOperatorByPartition(bytes32 partition, address operator) external 
+    validOperatorAddressOnly(operator) {
+        _partitionApprovals[msg.sender][partition][operator] = true;
+        emit AuthorizedOperatorByPartition(partition, operator, msg.sender);
+    }
+&nbsp;
+    /**
+     * @notice Revokes authorisation of an operator previously given for a specified partition of `msg.sender`
+     * @notice Authorises an operator for a given partition of `msg.sender`
+     * @param partition The partition to which the operator is de-authorised
+     * @param operator An address which is being de-authorised
+     */
+    function revokeOperatorByPartition(bytes32 partition, address operator) external 
+    validOperatorAddressOnly(operator) {
+        _partitionApprovals[msg.sender][partition][operator] = false;
+        emit RevokedOperatorByPartition(partition, operator, msg.sender);
+    }
+&nbsp;
+    /**
+     * @notice Increases the total supply of the token and the corresponding amount of the specified owners partition
+     * @param partition The partition to allocate the increase in balance
+     * @param tokenHolder The token holder whose balance should be increased
+     * @param value The amount by which to increase the balance
+     * @param data Additional data attached to the minting of tokens
+     */
+    function issueByPartition(bytes32 partition, address tokenHolder, uint256 value, bytes calldata data) external 
+    onlyIfIssuanceEnabled {
+        _issueByPartition(partition, tokenHolder, value, data);
+    }
+&nbsp;
+    /**
+     * @notice Decreases totalSupply and the corresponding amount of the specified partition of msg.sender
+     * @param partition The partition to allocate the decrease in balance
+     * @param value The amount by which to decrease the balance
+     * @param data Additional data attached to the burning of tokens
+     */
+    function redeemByPartition(bytes32 partition, uint256 value, bytes calldata data) external {
+        _redeemByPartition(partition, msg.sender, ZERO_ADDRESS, value, data, "");
+    }
+&nbsp;
+    /**
+     * Transfers the ownership of tokens from a specified partition from one address to another address
+     * @param partition The partition from which to transfer tokens
+     * @param to The address to which to transfer tokens to
+     * @param value The amount of tokens to transfer from `_partition`
+     * @param data Additional data attached to the transfer of tokens
+     * @return The partition to which the transferred tokens were allocated for the _to address
+     */
+    function transferByPartition(bytes32 partition, address to, uint256 value, bytes calldata data) external 
+    returns (bytes32) {
+        return _transferByPartition(msg.sender, to, value, partition, data, ZERO_ADDRESS, "");
+    }
+&nbsp;
+    /**
+     * @notice Transfers the ownership of tokens from a specified partition from one address to another address
+     * @param partition The partition from which to transfer tokens
+     * @param from The address from which to transfer tokens from
+     * @param to The address to which to transfer tokens to
+     * @param value The amount of tokens to transfer from `_partition`
+     * @param data Additional data attached to the transfer of tokens
+     * @param operatorData Additional data attached to the transfer of tokens by the operator
+     * @return The partition to which the transferred tokens were allocated for the _to address
+     */
+    function operatorTransferByPartition(
+        bytes32 partition, 
+        address from, 
+        address to, 
+        uint256 value, 
+        bytes calldata data, 
+        bytes calldata operatorData
+    ) 
+    external returns (bytes32) {
+        return _operatorTransferByPartition(partition, from, to, value, data, operatorData);
+    }
+&nbsp;
+    /**
+     * @notice Decreases total supply and the corresponding amount of the specified partition of tokenHolder
+     * @param partition The partition to allocate the decrease in balance.
+     * @param tokenHolder The token holder whose balance should be decreased
+     * @param value The amount by which to decrease the balance
+     * @param data Additional data attached to the burning of tokens
+     * @param operatorData Additional data attached to the transfer of tokens by the operator
+     */
+    function operatorRedeemByPartition(
+        bytes32 partition, 
+        address tokenHolder, 
+        uint256 value, 
+        bytes calldata data, 
+        bytes calldata operatorData) 
+    external {
+        _operatorRedeemByPartition(partition, tokenHolder, value, data, operatorData);
+    }
+&nbsp;
+    /**
+     * @notice Allows an authorized address (controller) to transfer tokens between any two token holders.
+     * @dev The transfer must still respect the balances of the token holders 
+     * (so the transfer must be for at most "balanceOf(_from)" tokens) 
+     * and potentially also need to respect other transfer restrictions.
+     * This function can only be executed by the controller address.
+     *
+     * @param from The address which you want to send tokens from
+     * @param to The address which you want to transfer to
+     * @param value The amount of tokens to be transferred
+     * @param data The data to validate the transfer.
+     * @param operatorData The data attached by the controller during the token tranfer.
+     * It usually contains a reason string (for example "force transfer") in order to provide transparency on-chain. 
+     */
+    function controllerTransfer(
+        address from, 
+        address to, 
+        uint256 value, 
+        bytes calldata data, 
+        bytes calldata operatorData
+    ) 
+    external onlyIfControllable onlyController(msg.sender) {
+        // Transfer a given amount of tokens between the two addresses specified.
+        // Notice that the token transfer takes place on the default partition.
+        address operator = msg.sender;
+        _transferByPartition(from, to, value, DEFAULT_PARTITION, data, operator, operatorData);
+&nbsp;
+        // Emit the "ControllerTransfer" event as per ERC-1644
+        emit ControllerTransfer(msg.sender, from, to, value, data, operatorData);
+    }
+&nbsp;
+    /**
+     * @notice This function allows an authorized address to redeem tokens for any token holder.
+     * The redemption must still respect the balances of the token holder (so the redemption must be for at most
+     * "balanceOf(_tokenHolder)" tokens) and potentially also need to respect other transfer restrictions.
+     * This function can only be executed by the controller address.
+     *
+     * @param tokenHolder The account whose tokens will be redeemed.
+     * @param value The amount of tokens that need to be redeemed.
+     * @param data The data to validate the transfer.
+     * @param operatorData The data attached to the transfer by controller to emit in event. 
+     * It is more like a reason string for calling this function (aka force transfer) 
+     * which provides the transparency on-chain. 
+     */
+<span class="fstat-no" title="function not covered" >    function controllerRedeem(</span>
+        address tokenHolder, 
+        uint256 value, 
+        bytes calldata data, 
+        bytes calldata operatorData
+    ) 
+    external onlyIfControllable onlyController(msg.sender) {
+        // Redeem (burn) a given amount of tokens from the holder specified
+<span class="cstat-no" title="statement not covered" >        address operator = msg.sender</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        _redeemByPartition(DEFAULT_PARTITION, tokenHolder, operator, value, data, operatorData)</span>;
+&nbsp;
+        // Emit the "ControllerRedemption" event as per ERC-1644
+<span class="cstat-no" title="statement not covered" >        emit ControllerRedemption(msg.sender, tokenHolder, value, data, operatorData);</span>
+    }
+&nbsp;
+    /**
+     * @notice Indicates whether the token is controllable or not.
+     * If the token is controllable then the controller address is allowed to do the following:
+     * 1) To transfer tokens between any two token holders, by calling the function "controllerTransfer"
+     * 2) To redeem a given amount of tokens by calling the function "controllerRedeem"
+     * 
+     * If the token is not controllable then the functions "controllerTransfer" and "controllerRedeem" 
+     * are guaranteed to fail because they they can only be called by a controller.
+     *
+     * @return returns true if the token is controllable
+     */
+    function isControllable() external view returns (bool) {
+        return _isControllable();
+    }
+&nbsp;
+    /**
+     * Counts the sum of all partitions balances assigned to an owner
+     * @param addr An address for whom to query the balance
+     * @return The number of tokens owned by the token holder
+     */
+    function balanceOf(address addr) external view returns (uint256) {
+        return _balances[addr];
+    }
+&nbsp;
+    /**
+     * Counts the balance associated with a specific partition assigned to an token holder
+     * @param partition The partition for which to query the balance
+     * @param addr An address for whom to query the balance
+     * @return The number of tokens owned by the holder
+     */
+    function balanceOfByPartition(bytes32 partition, address addr) external view returns (uint256) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (_isValidPartition(partition, addr))
+            return _partitions[addr][_partitionToIndex[addr][partition] - 1].amount;
+        else
+<span class="cstat-no" title="statement not covered" >            return 0;</span>
+    }
+&nbsp;
+    /**
+     * Gets the list of partitions available to a token holder
+     * @param addr An address corresponds whom partition list is queried
+     * @return returns a list of partitions
+     */
+    function partitionsOf(address addr) external view returns (bytes32[] memory) {
+        bytes32[] memory partitionsList = new bytes32[](_partitions[addr].length);
+        for (uint256 i = 0; i &lt; _partitions[addr].length; i++) {
+            partitionsList[i] = _partitions[addr][i].partition;
+        } 
+        return partitionsList;
+    }
+&nbsp;
+    /**
+     * @dev Total number of tokens in existence
+     */
+    function totalSupply() external view returns (uint256) {
+        return _totalSupply;
+    }
+&nbsp;
+    /**
+     * Indicates if the operator specified is an authorized operator for all partitions of the token holder.
+     * @param operator The operator to check
+     * @param tokenHolder The token holder to check
+     * @return returns true if the operator is authorized.
+     */
+    function isOperator(address operator, address tokenHolder) external view returns (bool) {
+        return _approvals[tokenHolder][operator];
+    }
+&nbsp;
+    /**
+     * Indicates if an operator is an authorized on a given partition of the token holder specified.
+     * @param partition The partition to check
+     * @param operator The operator to check
+     * @param tokenHolder The token holder to check
+     * @return returns true if the operator is authorized.
+     */
+    function isOperatorForPartition(bytes32 partition, address operator, address tokenHolder) external view 
+    returns (bool) {
+        return _partitionApprovals[tokenHolder][partition][operator];
+    }
+&nbsp;
+    /**
+     * @notice The standard provides an on-chain function to determine whether a transfer will succeed,
+     * and return details indicating the reason if the transfer is not valid.
+     * @param from The address from whom the tokens get transferred.
+     * @param to The address to which to transfer tokens to.
+     * @param partition The partition from which to transfer tokens
+     * @param value The amount of tokens to transfer from `_partition`
+     * @param data Additional data attached to the transfer of tokens
+     * @return ESC (Ethereum Status Code) following the EIP-1066 standard
+     * @return Application specific reason codes with additional details
+     * @return The partition to which the transferred tokens were allocated for the _to address
+     */
+    function canTransferByPartition(address from, address to, bytes32 partition, uint256 value, bytes calldata data) 
+    external view returns (byte, bytes32, bytes32) {
+        return _canTransferByPartition(from, to, partition, value, data);
+    }
+&nbsp;
+    /**
+     * @notice Indicates if the address specified is the controller of the security token.
+     * @return returns true if the address specified is the controller of the security token.
+     */
+<span class="fstat-no" title="function not covered" >    function isController(address addr) public view returns (bool</span>) {
+<span class="cstat-no" title="statement not covered" >        return _isController(addr);</span>
+    }
+&nbsp;
+    /**
+     * @notice Pauses token trading.
+     */
+    function pause() public {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(canPause(msg.sender), "Insufficient permissions. You are not allowed to pause token trading.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(!_paused, "Token trading is already paused");
+        _paused = true;
+        emit Paused(msg.sender);
+    }
+&nbsp;
+    /**
+     * @notice Unpauses token trading.
+     */
+    function unPause() public {
+        require(canPause(msg.sender), "Insufficient permissions. You are not allowed to unpause token trading.");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(_paused, "Token trading is already unpaused");
+        _paused = false;
+        emit UnPaused(msg.sender);
+    }
+&nbsp;
+    /**
+     * @notice Indicates if token trading is paused.
+     * @return returns true if trading is paused.
+     */
+    function isPaused() public view returns (bool) {
+        return _paused;
+    }
+&nbsp;
+    /**
+     * @notice Indicates if the address specified is allowed to pause/unpause the token.
+     * @param addr Specifies the address.
+     * @return returns true if the address is allowed to perform the action requested.
+     */
+    function canPause(address addr) public view returns(bool);
+&nbsp;
+    /**
+     * @notice Indicates if the address specified is allowed to issue tokens.
+     * @param addr Specifies the address.
+     * @return returns true if the address is allowed to perform the action requested.
+     */
+    function canIssue(address addr) public view returns(bool);
+&nbsp;
+    /**
+     * @notice Indicates if the address specified is allowed to redeem tokens.
+     * @param addr Specifies the address.
+     * @return returns true if the address is allowed to perform the action requested.
+     */
+    function canRedeem(address addr) public view returns(bool);
+&nbsp;
+    /**
+     * @notice Indicates if the address specified is allowed to freeze the issuance of tokens.
+     * @param addr Specifies the address.
+     * @return returns true if the address is allowed to perform the action requested.
+     */
+    function canFreezeMinting(address addr) public view returns(bool);
+&nbsp;
+    // ------------------------------------------------------------------------------------------
+    // Internal functions
+    // ------------------------------------------------------------------------------------------
+    /**
+     * @notice Indicates if the issuance has finished for the token, as per ERC-1594
+     * If a token returns FALSE for isIssuable() then it MUST always return FALSE in the future.
+     * If a token returns FALSE for isIssuable() then it MUST never allow additional tokens to be issued.
+     * @return returns true if no new tokens can be minted or issued.
+     */
+    function _isIssuable() internal view returns (bool) {
+        return !_issuanceStopped;
+    }
+&nbsp;
+    function bytes32ToString(bytes32 x) internal pure returns (string memory) {
+        bytes memory bytesString = new bytes(32);
+        uint charCount = 0;
+        for (uint j = 0; j &lt; 32; j++) {
+            byte char = byte(bytes32(uint(x) * 2 ** (8 * j)));
+            if (char != 0) {
+                bytesString[charCount] = char;
+                charCount++;
+            }
+        }
+        bytes memory bytesStringTrimmed = new bytes(charCount);
+        for (uint j = 0; j &lt; charCount; j++) {
+            bytesStringTrimmed[j] = bytesString[j];
+        }
+        return string(bytesStringTrimmed);
+    }
+&nbsp;
+    /**
+    * @notice Changes a string to upper case
+    * @param base String to change
+    */
+    function toUpper(string memory base) internal pure returns (string memory) {
+        bytes memory _baseBytes = bytes(base);
+        for (uint i = 0; i &lt; _baseBytes.length; i++) {
+            bytes1 b1 = _baseBytes[i];
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (b1 &gt;= 0x61 &amp;&amp; b1 &lt;= 0x7A) {
+<span class="cstat-no" title="statement not covered" >                b1 = bytes1(uint8(b1)-32)</span>;
+            }
+            _baseBytes[i] = b1;
+        }
+        return string(_baseBytes);
+    }
+&nbsp;
+    /**
+     * @notice Increases the total supply of the token and the corresponding amount of the specified owners partition
+     * @param partition The partition to allocate the increase in balance
+     * @param tokenHolder The token holder whose balance should be increased
+     * @param value The amount by which to increase the balance
+     * @param data Additional data attached to the minting of tokens
+     */
+    function _issueByPartition(bytes32 partition, address tokenHolder, uint256 value, bytes memory data) 
+    internal onlyIfIssuanceEnabled onlyIfNotPaused nonReentrant {
+        require(value != uint256(0), "Zero value not allowed");
+        require(partition != bytes32(0), "The partition is required");
+        require(isSafeAddress(tokenHolder), "Invalid token holder");
+        require(canIssue(msg.sender), "Insufficient permissions. You are not allowed to issue tokens.");
+&nbsp;
+        uint256 index = _partitionToIndex[tokenHolder][partition];
+        if (index == 0) {
+            _partitions[tokenHolder].push(Partition(value, partition));
+            _partitionToIndex[tokenHolder][partition] = _partitions[tokenHolder].length;
+        } else {
+            _partitions[tokenHolder][index - 1].amount = _partitions[tokenHolder][index - 1].amount.add(value);
+        }
+        _totalSupply = _totalSupply.add(value);
+        _balances[tokenHolder] = _balances[tokenHolder].add(value);
+        emit IssuedByPartition(partition, tokenHolder, value, data);
+    }
+&nbsp;
+    function _isValidPartition(bytes32 partition, address addr) internal view returns(bool) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!isSafeAddress(addr)) { <span class="cstat-no" title="statement not covered" >return false;</span> }
+        if (_partitions[addr].length &lt; _partitionToIndex[addr][partition] || _partitionToIndex[addr][partition] == 0)
+            return false;
+        else
+            return true;
+    }
+&nbsp;
+    /**
+     * @notice Runs application specific validations before proceeding with a transfer of tokens.
+     * This function allows any derived contract to run any additional checks and token transfer restrictions on-chain.
+     *
+     * @dev Please notice that this function is required to return an ESC (Ethereum Status Code) as per EIP-1066
+     * A default implementation is provided below. 
+     * Derived contracts can override this function in order to implement any app-specific token restrictions.
+     *
+     * @param from The address from whom the tokens get transferred.
+     * @param to The address to which to transfer tokens to.
+     * @param partition The partition from which to transfer tokens
+     * @param data Additional data attached to the transfer of tokens
+     * @return ESC (Ethereum Status Code) following the EIP-1066 standard
+     * @return Application specific reason codes with additional details
+     */
+    function _validateTokenTransfer(address from, address to, bytes32 partition, bytes memory data) 
+    internal view returns (byte, bytes32);
+&nbsp;
+    function _transferByPartition
+    (
+        address from, 
+        address to, 
+        uint256 value, 
+        bytes32 partition, 
+        bytes memory data, 
+        address operator, 
+        bytes memory operatorData
+    ) 
+    internal onlyIfNotPaused nonReentrant
+    returns (bytes32) {
+        requireValidTransfer(from, to, value, partition, data);
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(_partitions[from][_partitionToIndex[from][partition] - 1].amount &gt;= value, "Insufficient balance");
+        uint256 fromIndex = _partitionToIndex[from][partition] - 1;
+        uint256 toIndex = _partitionToIndex[to][partition] - 1;
+        
+        // Changing the state values
+        _partitions[from][fromIndex].amount = _partitions[from][fromIndex].amount.sub(value);
+        _balances[from] = _balances[from].sub(value);
+        _partitions[to][toIndex].amount = _partitions[to][toIndex].amount.add(value);
+        _balances[to] = _balances[to].add(value);
+        
+        // Emit transfer event.
+        emit TransferByPartition(partition, operator, from, to, value, data, operatorData);
+&nbsp;
+        return partition;
+    }
+&nbsp;
+    /**
+     * @notice This function allows an authorized address to redeem tokens for any token holder.
+     * @param partition The partition 
+     * @param from The account whose tokens will be redeemed.
+     * @param operator The operator
+     * @param value The amount of tokens that need to be redeemed.
+     * @param data The data to validate the redemption of tokens.
+     * @param operatorData The data attached to the redemption by the controller to emit in event.
+     */
+    function _redeemByPartition(
+        bytes32 partition, 
+        address from, 
+        address operator, 
+        uint256 value, 
+        bytes memory data, 
+        bytes memory operatorData
+    ) 
+    internal onlyIfNotPaused nonReentrant {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(isSafeAddress(from), "Invalid token holder");
+        require(value != uint256(0), "Zero value not allowed");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(partition != bytes32(0), "The partition is required");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(_isValidPartition(partition, from), "Invalid partition");
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (!_isController(msg.sender)) {
+            <span class="missing-if-branch" title="else path not taken" >E</span>require(canRedeem(msg.sender), "Insufficient permissions. You are not allowed to redeem tokens.");
+        }
+&nbsp;
+        uint256 index = _partitionToIndex[from][partition] - 1;
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(_partitions[from][index].amount &gt;= value, "Insufficient value");
+&nbsp;
+        if (_partitions[from][index].amount == value) {
+            _deletePartitionForHolder(from, partition, index);
+        } else {
+            _partitions[from][index].amount = _partitions[from][index].amount.sub(value);
+        }
+        _balances[from] = _balances[from].sub(value);
+        _totalSupply = _totalSupply.sub(value);
+        emit RedeemedByPartition(partition, operator, from, value, data, operatorData);
+    }
+&nbsp;
+    /**
+     * @notice Transfers the ownership of tokens from a specified partition from one address to another address
+     * @param partition The partition from which to transfer tokens
+     * @param from The address from which to transfer tokens from
+     * @param to The address to which to transfer tokens to
+     * @param value The amount of tokens to transfer from `_partition`
+     * @param data Additional data attached to the transfer of tokens
+     * @param operatorData Additional data attached to the transfer of tokens by the operator
+     * @return The partition to which the transferred tokens were allocated for the _to address
+     */
+    function _operatorTransferByPartition
+    (
+        bytes32 partition, address from, address to, uint256 value, bytes memory data, bytes memory operatorData
+    ) internal onlyIfNotPaused returns (bytes32) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(isSafeAddress(from), "Invalid source address");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(isSafeAddress(to), "Invalid target address");
+        require(
+            this.isOperator(msg.sender, from) || this.isOperatorForPartition(partition, msg.sender, from),
+            "Invalid operator. Not authorised."
+        );
+        _transferByPartition(from, to, value, partition, data, msg.sender, operatorData);
+&nbsp;
+        return partition;
+    }
+&nbsp;
+    /**
+     * @notice Decreases total supply and the corresponding amount of the specified partition of tokenHolder
+     * @param partition The partition to allocate the decrease in balance.
+     * @param tokenHolder The token holder whose balance should be decreased
+     * @param value The amount by which to decrease the balance
+     * @param data Additional data attached to the burning of tokens
+     * @param operatorData Additional data attached to the transfer of tokens by the operator
+     */
+    function _operatorRedeemByPartition
+    (
+        bytes32 partition, address tokenHolder, uint256 value, bytes memory data, bytes memory operatorData
+    ) internal onlyIfNotPaused {
+        require(isSafeAddress(tokenHolder), "Invalid token holder");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(
+            this.isOperator(msg.sender, tokenHolder) || 
+            this.isOperatorForPartition(partition, msg.sender, tokenHolder),
+            "Not authorised"
+        );
+&nbsp;
+        _redeemByPartition(partition, tokenHolder, msg.sender, value, data, operatorData);
+    }
+&nbsp;
+    /**
+     * @notice The standard provides an on-chain function to determine whether a transfer will succeed,
+     * and return details indicating the reason if the transfer is not valid.
+     * @param from The address from whom the tokens get transferred.
+     * @param to The address to which to transfer tokens to.
+     * @param partition The partition from which to transfer tokens
+     * @param value The amount of tokens to transfer from `_partition`
+     * @param data Additional data attached to the transfer of tokens
+     * @return ESC (Ethereum Status Code) following the EIP-1066 standard
+     * @return Application specific reason codes with additional details
+     * @return The partition to which the transferred tokens were allocated for the _to address
+     */
+    function _canTransferByPartition(address from, address to, bytes32 partition, uint256 value, bytes memory data) 
+    internal view returns (byte, bytes32, bytes32) {
+        byte ethereumStatusCode;
+        bytes32 reason;
+        bytes32 validatedPartition;
+        (ethereumStatusCode, reason, validatedPartition) = _runBasicValidations(from, to, partition, value);
+&nbsp;
+        if (ethereumStatusCode != EIP1066_TOKEN_TRANSFER_SUCCESSFUL) {
+            return (ethereumStatusCode, reason, ZERO_BYTES32);
+        }
+&nbsp;
+        if (!_isController(msg.sender)) {
+            // This is the most likely scenario. 
+            // This is a token transfer between two regular parties (sender and receiver).
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (_paused) { <span class="cstat-no" title="statement not covered" >return (EIP1066_TOKEN_TRANSFER_FAILED, "Token trading is paused", ZERO_BYTES32);</span> }
+&nbsp;
+            // Provide a hook in order for derived contracts to run application-specific validations 
+            // before the transfer of tokens take place.
+            (ethereumStatusCode, reason) = _validateTokenTransfer(from, to, partition, data);
+&nbsp;
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (ethereumStatusCode != EIP1066_TOKEN_TRANSFER_SUCCESSFUL) {
+<span class="cstat-no" title="statement not covered" >                return (ethereumStatusCode, reason, ZERO_BYTES32);</span>
+            }
+        }
+&nbsp;
+        // All validations passed. The token transfer will succeed
+        return (EIP1066_TOKEN_TRANSFER_SUCCESSFUL, "Success", partition);
+    }
+&nbsp;
+    /**
+     * @notice Indicates if the address specified is considered a safe address.
+     * @param addr The address to evaluate
+     * @return returns true if the address is considered safe
+     */
+    function isSafeAddress(address addr) internal view returns (bool) {
+        return ((addr != ZERO_ADDRESS) &amp;&amp; (addr != address(this)));
+    }
+&nbsp;
+    // ------------------------------------------------------------------------------------------
+    // Private functions
+    // ------------------------------------------------------------------------------------------
+    /**
+     * @notice Indicates whether the token is controllable or not.
+     * If the token is controllable then the controller address is allowed to do the following:
+     * 1) To transfer tokens between any two token holders, by calling the function "controllerTransfer"
+     * 2) To redeem a given amount of tokens by calling the function "controllerRedeem"
+     * 
+     * If the token is not controllable then the functions "controllerTransfer" and "controllerRedeem" 
+     * are guaranteed to fail because they they can only be called by a controller.
+     *
+     * @return returns true if the token is controllable
+     */
+    function _isControllable() private view returns (bool) {
+        return _controllerAddress != ZERO_ADDRESS;
+    }
+&nbsp;
+    /**
+     * @notice Indicates if the address specified is the controller of the security token.
+     * @return returns true if the address specified is the controller of the security token.
+     */
+    function _isController(address addr) private view returns (bool) {
+        return _isControllable() &amp;&amp; isSafeAddress(addr) &amp;&amp; (_controllerAddress == addr);
+    }
+&nbsp;
+    /**
+     * @notice Permanently freezes minting of this security token.
+     */
+<span class="fstat-no" title="function not covered" >    function _freezeMinting() private onlyIfIssuanceEnable</span>d {
+<span class="cstat-no" title="statement not covered" >        require(canFreezeMinting(msg.sender), "Insufficient permissions. You are not allowed to freeze minting.")</span>;
+<span class="cstat-no" title="statement not covered" >        _issuanceStopped = true</span>;
+    }
+&nbsp;
+    function _runBasicValidations(address from, address to, bytes32 partition, uint256 value) 
+    private view returns (byte, bytes32, bytes32) {
+        // Run the very basic validations common to all scenarios
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!isSafeAddress(from)) { <span class="cstat-no" title="statement not covered" >return (0x57, "Invalid sender", ZERO_BYTES32);</span> }
+        if (!isSafeAddress(to)) { return (0x57, "Invalid receiver", ZERO_BYTES32); }
+&nbsp;
+        if (!_isValidPartition(partition, from)) { 
+            return (EIP1066_TOKEN_TRANSFER_FAILED, "The partition does not exist", ZERO_BYTES32); 
+        } 
+        if (_partitions[from][_partitionToIndex[from][partition] - 1].amount &lt; value) { 
+            return (EIP1066_AWAITING_PAYMENT_FROM_OTHERS, "Insufficent balance", ZERO_BYTES32); 
+        } 
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!KindMath.checkSub(_balances[from], value) || !KindMath.checkAdd(_balances[to], value)) { 
+<span class="cstat-no" title="statement not covered" >            return (EIP1066_TOKEN_TRANSFER_FAILED, "Overflow", ZERO_BYTES32); </span>
+        }
+&nbsp;
+        return (EIP1066_TOKEN_TRANSFER_SUCCESSFUL, "Success", partition);
+    }
+&nbsp;
+    /**
+     * @notice Enforces validation during a tokens transfer between two parties.
+     * @param from The address from whom the tokens get transferred.
+     * @param to The address to which to transfer tokens to.
+     * @param value The amount of tokens to transfer on the partition specified.
+     * @param partition The partition where the token transfer takes place.
+     * @param data Any additional data attached to the transfer of tokens
+     */
+    function requireValidTransfer(address from, address to, uint256 value, bytes32 partition, bytes memory data) 
+    private view {
+        byte ethereumStatusCode;
+        bytes32 reason;
+        bytes32 validatedPartition;
+        (ethereumStatusCode, reason, validatedPartition) = _canTransferByPartition(from, to, partition, value, data);
+        bool success = (ethereumStatusCode == EIP1066_TOKEN_TRANSFER_SUCCESSFUL);
+&nbsp;
+        require(success, bytes32ToString(reason));
+    }
+&nbsp;
+    function _deletePartitionForHolder(address holder, bytes32 partition, uint256 index) private {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (index != _partitions[holder].length - 1) {
+<span class="cstat-no" title="statement not covered" >            _partitions[holder][index] = _partitions[holder][_partitions[holder].length - 1]</span>;
+<span class="cstat-no" title="statement not covered" >            _partitionToIndex[holder][_partitions[holder][index].partition] = index + 1</span>;
+        }
+        delete _partitionToIndex[holder][partition];
+        _partitions[holder].length--;
+    }
+&nbsp;
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 20 2019 12:57:02 GMT+0300 (Arabian Standard Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

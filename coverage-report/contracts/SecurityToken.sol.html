@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/SecurityToken.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> SecurityToken.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">80% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>8/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>2/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">80% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>8/10</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">pragma solidity ^0.5.4;
+&nbsp;
+import "./whitelists/iEstate/DefaultSecurityTokenWhitelist.sol";
+import "./ERC/ERC1400/ERC1400.sol";
+&nbsp;
+/**
+ * @title Represents a security token compliant with the ERC-1400 family of standards.
+ */
+contract SecurityToken is ERC1400 {
+&nbsp;
+    // The whitelist interface
+    DefaultSecurityTokenWhitelist private _whitelistInterface;
+&nbsp;
+    // The security roles defined in our custom implementation
+    bytes32 constant internal APP_IDENTIFIER = "iEstate STO Platform";
+    bytes32 constant internal SECURITY_LEVEL1 = "iEstate STO Platform - Level1";
+    bytes32 constant internal SECURITY_LEVEL2 = "iEstate STO Platform - Level2";
+&nbsp;
+    /**
+     * @notice Constructor 
+     * @param owner The address of the contract owner (aka: the "owner" of the security token)
+     * @param controllerAddr The address of the controller, if any, as per ERC-1644
+     * @param whitelistAddr The address of the whitelist
+     * @param tokenName The name of the token
+     * @param tokenSymbol The symbol of the token
+     */
+    constructor
+    (
+        address owner, 
+        address controllerAddr, 
+        address whitelistAddr,
+        string memory tokenName, 
+        string memory tokenSymbol
+    ) 
+    public ERC1400(owner, controllerAddr, APP_IDENTIFIER, tokenName, tokenSymbol, 0) {
+        _whitelistInterface = DefaultSecurityTokenWhitelist(whitelistAddr);
+    }
+&nbsp;
+    /**
+     * @notice Indicates if the address specified is allowed to pause/unpause the token.
+     * @param addr Specifies the address.
+     * @return returns true if the address is allowed to perform the action requested.
+     */
+    function canPause(address addr) public view returns(bool) {
+        return _whitelistInterface.isMemberOf(addr, SECURITY_LEVEL2, APP_IDENTIFIER);
+    }
+&nbsp;
+    /**
+     * @notice Indicates if the address specified is allowed to issue tokens.
+     * @param addr Specifies the address.
+     * @return returns true if the address is allowed to perform the action requested.
+     */
+    function canIssue(address addr) public view returns(bool) {
+        return _whitelistInterface.isMemberOf(addr, SECURITY_LEVEL2, APP_IDENTIFIER);
+    }
+&nbsp;
+    /**
+     * @notice Indicates if the address specified is allowed to redeem tokens.
+     * @param addr Specifies the address.
+     * @return returns true if the address is allowed to perform the action requested.
+     */
+    function canRedeem(address addr) public view returns(bool) {
+        return _whitelistInterface.isMemberOf(addr, SECURITY_LEVEL2, APP_IDENTIFIER);
+    }
+&nbsp;
+    /**
+     * @notice Indicates if the address specified is allowed to freeze the issuance of tokens.
+     * @param addr Specifies the address.
+     * @return returns true if the address is allowed to perform the action requested.
+     */
+    function canFreezeMinting(address addr) public view returns(bool) {
+        return _whitelistInterface.isMemberOf(addr, SECURITY_LEVEL2, APP_IDENTIFIER);
+    }
+&nbsp;
+    /**
+     * @notice Runs application specific validations before proceeding with a transfer of tokens.
+     * This function allows any derived contract to run any additional checks and token transfer restrictions on-chain.
+     *
+     * @dev Please notice that this function is required to return an ESC (Ethereum Status Code) as per EIP-1066
+     * A default implementation is provided below. 
+     * Derived contracts can override this function in order to implement any app-specific token restrictions.
+     *
+     * @param from The address from whom the tokens get transferred.
+     * @param to The address to which to transfer tokens to.
+     * @param partition The partition from which to transfer tokens
+     * @param data Additional data attached to the transfer of tokens
+     * @return ESC (Ethereum Status Code) following the EIP-1066 standard
+     * @return Application specific reason codes with additional details
+     */
+    function _validateTokenTransfer(address from, address to, bytes32 partition, bytes memory data) 
+    internal view returns (byte, bytes32) {
+&nbsp;
+        // Make sure the from address is whitelisted
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!_whitelistInterface.isWhitelisted(from, APP_IDENTIFIER)) {
+<span class="cstat-no" title="statement not covered" >            return (EIP1066_NOT_FOUND, "The sender is not whitelisted.");</span>
+        }
+&nbsp;
+        // Make sure the receiver is whitelisted
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!_whitelistInterface.isWhitelisted(to, APP_IDENTIFIER)) {
+<span class="cstat-no" title="statement not covered" >            return (EIP1066_NOT_FOUND, "The receiver is not whitelisted.");</span>
+        }
+&nbsp;
+        return (EIP1066_TOKEN_TRANSFER_SUCCESSFUL, "Transfer Successful");
+    }
+&nbsp;
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 20 2019 12:57:02 GMT+0300 (Arabian Standard Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
